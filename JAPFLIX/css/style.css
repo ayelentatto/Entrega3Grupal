@@ -26,3 +26,8 @@ main {
 .offcanvas-top{
     height: fit-content;
 }
+
+.unaPeli{
+   color: white;
+   cursor: pointer;
+}
