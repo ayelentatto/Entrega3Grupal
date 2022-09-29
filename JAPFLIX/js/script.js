@@ -30,7 +30,7 @@ function mostrar(peliculas){
     peliculas.forEach(peli => {
         let k = 1;
         let inicio = 
-        `<li class="d-flex mx-5 justify-content-between text-white unaPeli" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="alert(${datosPeliculas.indexOf(peli)})">
+        `<li class="d-flex mx-5 justify-content-between text-white unaPeli" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="alert(${peli.id})">
             <div>
                 <h5>${peli.title}</h5>
                 <p class="text-secondary fst-italic">${peli.tagline}</p>
@@ -48,4 +48,23 @@ function mostrar(peliculas){
         inicio += `</div> </li>`;
         document.getElementById("lista").innerHTML += inicio;
     });
+}
+
+function alert(idPeli){
+    let gen = [];
+    let movie = datosPeliculas.find(({id}) => id === idPeli);
+    movie.genres.forEach(genero => {
+        gen.push(genero.name);
+    })
+    let anio = movie.release_date.split('-');
+
+    document.getElementById("tituloCanvas").innerHTML = `<h3 class="offcanvas-title" id="offcanvasTopLabel">${movie.title}</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>`;
+    document.getElementById("overviewCanvas").innerHTML = movie.overview;
+    document.getElementById("generosCanvas").innerHTML = gen.join(' - ');
+    document.getElementById("anioCanvas").innerHTML = `Año: ${anio[0]}`;
+    document.getElementById("runtimeCanvas").innerHTML = `Duración: ${movie.runtime} min.`;
+    document.getElementById("budgetCanvas").innerHTML = `Presupuesto: $${movie.budget}`;
+    document.getElementById("revenueCanvas").innerHTML = `Ganacias: $${movie.revenue}`;
+
 }
